@@ -1,0 +1,1154 @@
+@use "./variables" as *;
+
+body {
+  background-color: var(--BG);
+  min-height: 100vh;
+}
+
+header {
+  display: grid;
+  padding: 2em;
+  background-color: var(--TopBGPattern);
+  height: 50vh;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+
+  .intro_text {
+    max-height: 1vh;
+
+    h1 {
+      font-size: 1.6em;
+      padding-bottom: 0.3em;
+      color: var(--Text2);
+    }
+
+    p {
+      color: var(--Text);
+      font-weight: 600;
+    }
+  }
+
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--Text);
+    cursor: pointer;
+    height: fit-content;
+
+    span {
+      color: var(--Text);
+      font-weight: 600;
+    }
+
+    #toggleMode {
+      display: none;
+    }
+
+    .toggle-btn {
+      width: 4rem;
+      height: 2rem;
+      padding: 5px 10px;
+      background: var(--Toggle);
+      border-radius: 6rem;
+
+      .circle {
+        width: 1.4rem;
+        height: 1.4rem;
+        border-radius: 50%;
+        background-color: var(--BG);
+        transition: 500ms ease;
+      }
+    }
+
+    #toggleMode:checked ~ .toggle-btn > .circle {
+      background-color: #fff;
+      transform: translateX(25px);
+      transition: all 500ms ease;
+    }
+  }
+}
+
+.main__container {
+  display: grid;
+  justify-content: center;
+  padding: 0 2rem;
+  position: relative;
+  top: -3.5rem;
+
+  .overall__info {
+    display: grid;
+    width: 83vw;
+
+    .facebook {
+      display: inline-block;
+      padding: 2em 0;
+      background-color: var(--CardBG);
+      text-align: center;
+      border-top: 8px solid $Facebook;
+      border-radius: 10px;
+      transition: 500ms ease;
+      cursor: pointer;
+
+      .icon_name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        img {
+          width: 10%;
+          border-radius: 5px;
+        }
+
+        p {
+          color: var(--Text);
+          font-weight: 600;
+        }
+      }
+
+      .total__number {
+        margin: 0.2em 0 0;
+        font-size: 5em;
+        font-weight: 500;
+        color: var(--Text2);
+      }
+
+      .followers {
+        color: var(--Text);
+        font-size: 1.5em;
+        text-transform: uppercase;
+      }
+
+      .growth {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 1em 0 0;
+
+        img {
+          width: 5%;
+        }
+
+        p {
+          color: $LimeGreen;
+          font-weight: 600;
+        }
+      }
+    }
+    .facebook:hover {
+        background-color: var(--CardBGHover);
+    }
+
+    .twitter {
+      @extend .facebook;
+      margin: 2em 0;
+      border-top: 8px solid $Twitter;
+    }
+
+    .instagram {
+      @extend .facebook;
+      margin: 2em 0;
+      border-top: none;
+      position: relative;
+    }
+    .instagram::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        width: 100%;
+        height: 10px;
+        background: linear-gradient(to left, hsl(37, 97%, 70%), hsl(329, 70%, 58%)
+        );
+        left: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+    }
+
+    .youtube {
+      @extend .facebook;
+      margin: 2em 0;
+      border-top: 8px solid $YouTube;
+
+      .growth {
+        p {
+          color: $BrightRed;
+        }
+      }
+    }
+  }
+
+  .overview__info {
+    display: grid;
+    width: 83vw;
+    margin: 1em 0;
+
+    .facebook_views {
+        display: grid;
+        gap: 20px;
+        padding: 2em;
+        margin: 0 0 1em;
+        background-color: var(--CardBG);
+        text-align: center;
+        border-radius: 10px;
+        cursor: pointer;
+
+        .pageViews {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                color: var(--Text);
+                font-weight: 600;
+                font-size: 17px;
+            }
+        }
+
+        .pageViews__total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                color: var(--Text2);
+                font-size: 3em;
+            }
+
+            .growth {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                img {
+                    width: 14px;
+                }
+
+                span {
+                    color: $LimeGreen;
+                    font-size: 17px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    .facebook_views:hover {
+        background-color: var(--CardBGHover);
+    }
+
+    .facebook_likes {
+        display: grid;
+        gap: 20px;
+        padding: 2em;
+        background-color: var(--CardBG);
+        text-align: center;
+        border-radius: 10px;
+        margin: 0 0 1em;
+        cursor: pointer;
+        transition: 500ms ease;
+
+        .Likes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                color: var(--Text);
+                font-size: 17px;
+                font-weight: 600;
+            }
+        }
+
+        .Likes__total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                color: var(--Text2);
+                font-size: 3em;
+            }
+
+            .growth {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                img {
+                    width: 14px;
+                }
+
+                span {
+                    color: $BrightRed;
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+    .facebook_likes:hover {
+        background-color: var(--CardBGHover);
+    }
+
+    .instagram_likes {
+        @extend .facebook_likes;
+
+
+            .Likes__total {
+
+                .growth {
+
+                    span {
+                        color: $LimeGreen;
+                    }
+                }
+            }
+
+    }
+
+    .instagram_views {
+        @extend .facebook_views;
+    }
+
+    .twitter_retweets {
+        display: grid;
+        gap: 20px;
+        padding: 2em;
+        background-color: var(--CardBG);
+        text-align: center;
+        border-radius: 10px;
+        margin: 0 0 1em;
+        cursor: pointer;
+        transition: 500ms ease;
+
+        p {
+            color: var(--Text);
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .retweets {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .retweets__total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                color: var(--Text2);
+                font-size: 3em;
+                font-weight: 100;
+            }
+
+            .growth {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                img {
+                    width: 14px;
+                }
+
+                span {
+                    font-size: 17px;
+                    color: $LimeGreen;
+                }
+            }
+        }
+
+    }
+    .twitter_retweets:hover {
+        background-color: var(--CardBGHover);
+    }
+
+    .twitter_likes {
+        @extend .facebook_likes;
+
+        .Likes__total {
+
+            .growth {
+
+                span {
+                    color: $LimeGreen;
+                }
+            }
+        }
+    }
+
+    .youtube_likes {
+        @extend .facebook_likes;
+    }
+
+    .youtube_views {
+        @extend .facebook_views;
+
+        .pageViews__total {
+
+            .growth {
+
+                span {
+                    color: $BrightRed;
+                }
+            }
+        }
+    }
+
+  }
+}
+
+@media screen and (min-width: 768px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2em 2em 5em;
+    background-color: var(--TopBGPattern);
+    border-radius: unset;
+
+    .intro_text {
+      max-height: 1vh;
+
+      h1 {
+        font-size: 1.6em;
+        padding-bottom: 0.5em;
+        color: var(--Text2);
+      }
+
+      p {
+        color: var(--Text);
+        font-weight: 600;
+      }
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      gap: 20px;
+      border-top: none;
+      cursor: pointer;
+      height: fit-content;
+
+      span {
+        color: var(--Text);
+        font-weight: 600;
+      }
+
+      #toggleMode {
+        display: none;
+      }
+
+      .toggle-btn {
+        width: 5rem;
+        height: 2rem;
+        padding: 5px 10px;
+        background: var(--Toggle);
+        border-radius: 6rem;
+
+        .circle {
+          width: 1.4rem;
+          height: 1.4rem;
+          border-radius: 50%;
+          background-color: var(--BG);
+          transition: 500ms ease;
+        }
+      }
+
+      #toggleMode:checked ~ .toggle-btn > .circle {
+        background-color: #fff;
+        transform: translateX(40px);
+        transition: all 500ms ease;
+      }
+    }
+  }
+
+  .main__container {
+    display: grid;
+    justify-content: center;
+    padding: 0 2rem;
+    position: relative;
+    top: -10rem;
+
+    .overall__info {
+      display: grid;
+      width: 92vw;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      align-items: center;
+      gap: 15px;
+
+      .facebook {
+        display: inline-block;
+        padding: 2em 0;
+        background-color: var(--CardBG);
+        text-align: center;
+        border-top: 8px solid $Facebook;
+        border-radius: 10px;
+
+        .icon_name {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 10px;
+
+          img {
+            width: 15%;
+            border-radius: 5px;
+          }
+
+          p {
+            color: var(--Text);
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+
+        .total__number {
+          margin: 0.2em 0 0;
+          font-size: 2em;
+          font-weight: 500;
+          color: var(--Text2);
+        }
+
+        .followers {
+          color: var(--Text);
+          font-size: .7em;
+          text-transform: uppercase;
+        }
+
+        .growth {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          margin: 1em 0 0;
+
+          img {
+            width: 10%;
+          }
+
+          p {
+            color: $LimeGreen;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .twitter {
+        margin: 0;
+        border-top: 8px solid $Twitter;
+      }
+
+      .instagram {
+        margin: 0;
+        border-top: none;
+
+      }
+
+      .youtube {
+        margin: 0;
+        border-top: 8px solid $YouTube;
+
+        .growth {
+          p {
+            color: $BrightRed;
+          }
+        }
+      }
+    }
+
+    .overview__info {
+        display: grid;
+        width: 92vw;
+        margin: 1em 0 0;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        align-items: center;
+        gap: 15px;
+    
+        .facebook_views {
+            display: grid;
+            gap: 20px;
+            padding: 2em;
+            background-color: var(--CardBG);
+            text-align: center;
+            border-radius: 10px;
+            margin: 0;
+    
+            .pageViews {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column-reverse;
+                gap: 10px;
+    
+                p {
+                    color: var(--Text);
+                    font-weight: 600;
+                    font-size: 15px;
+                }
+            }
+    
+            .pageViews__total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                p {
+                    color: var(--Text2);
+                    font-size: 1em;
+                }
+    
+                .growth {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+    
+                    img {
+                        width: 10px;
+                    }
+    
+                    span {
+                        color: $LimeGreen;
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    
+        .facebook_likes {
+            display: grid;
+            gap: 20px;
+            padding: 2em;
+            background-color: var(--CardBG);
+            text-align: center;
+            border-radius: 10px;
+    
+            .Likes {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column-reverse;
+                gap: 10px;
+    
+                p {
+                    color: var(--Text);
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+            }
+    
+            .Likes__total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                p {
+                    color: var(--Text2);
+                    font-size: 1em;
+                }
+    
+                .growth {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+    
+                    img {
+                        width: 10px;
+                    }
+    
+                    span {
+                        color: $BrightRed;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    
+        .instagram_likes {
+    
+    
+                .Likes__total {
+    
+                    .growth {
+    
+                        span {
+                            color: $LimeGreen;
+                        }
+                    }
+                }
+    
+        }
+    
+        .instagram_views {
+            padding: 2em;
+        }
+    
+        .twitter_retweets {
+            display: grid;
+            gap: 20px;
+            padding: 2em;
+            background-color: var(--CardBG);
+            text-align: center;
+            border-radius: 10px;
+    
+            p {
+                color: var(--Text);
+                font-size: 17px;
+                font-weight: 600;
+            }
+    
+            .retweets {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+    
+            .retweets__total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                p {
+                    color: var(--Text2);
+                    font-size: 1em;
+                    font-weight: 100;
+                }
+    
+                .growth {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+    
+                    img {
+                        width: 14px;
+                    }
+    
+                    span {
+                        font-size: 17px;
+                        color: $LimeGreen;
+                    }
+                }
+            }
+    
+        }
+    
+        .twitter_likes {
+    
+            .Likes__total {
+    
+                .growth {
+    
+                    span {
+                        color: $LimeGreen;
+                    }
+                }
+            }
+        }
+    
+        .youtube_likes {
+            padding: 2em;
+        }
+    
+        .youtube_views {
+    
+            .pageViews__total {
+    
+                .growth {
+    
+                    span {
+                        color: $BrightRed;
+                    }
+                }
+            }
+        }
+    
+    }
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2em 3em 10em;
+    background-color: var(--TopBGPattern);
+    border-radius: unset;
+
+    .intro_text {
+      max-height: 1vh;
+
+      h1 {
+        font-size: 2em;
+        padding-bottom: 0.5em;
+        color: var(--Text2);
+      }
+
+      p {
+        color: var(--Text);
+        font-weight: 600;
+        font-size: 1.2em;
+      }
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      gap: 20px;
+      border-top: none;
+      cursor: pointer;
+      height: fit-content;
+
+      span {
+        color: var(--Text);
+        font-weight: 600;
+        font-size: 1.2em;
+      }
+
+      #toggleMode {
+        display: none;
+      }
+
+      .toggle-btn {
+        width: 5rem;
+        height: 2rem;
+        padding: 5px 10px;
+        background: var(--Toggle);
+        border-radius: 6rem;
+
+        .circle {
+          width: 1.4rem;
+          height: 1.4rem;
+          border-radius: 50%;
+          background-color: var(--BG);
+          transition: 500ms ease;
+        }
+      }
+
+      #toggleMode:checked ~ .toggle-btn > .circle {
+        background-color: #fff;
+        transform: translateX(40px);
+        transition: all 500ms ease;
+      }
+    }
+  }
+
+  .main__container {
+    display: grid;
+    justify-content: center;
+    padding: 0 2rem;
+    position: relative;
+    top: -10rem;
+
+    .overall__info {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 20px;
+
+      .facebook {
+        display: inline-block;
+        padding: 2em 4em;
+        background-color: var(--CardBG);
+        text-align: center;
+        border-top: 8px solid $Facebook;
+        border-radius: 10px;
+        width: 100%;
+
+        .icon_name {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          gap: 10px;
+
+          img {
+            width: 15%;
+            border-radius: 5px;
+          }
+
+          p {
+            color: var(--Text);
+            font-weight: 600;
+          }
+        }
+
+        .total__number {
+          margin: 0.2em 0 0;
+          font-size: 5em;
+          font-weight: 500;
+          color: var(--Text2);
+        }
+
+        .followers {
+          color: var(--Text);
+          font-size: 1.5em;
+          text-transform: uppercase;
+        }
+
+        .growth {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          margin: 1em 0 0;
+
+          img {
+            width: 10%;
+          }
+
+          p {
+            color: $LimeGreen;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .twitter {
+        margin: 2em 0;
+        border-top: 8px solid $Twitter;
+      }
+
+      .instagram {
+        margin: 2em 0;
+        border-top: none;
+      }
+
+      .youtube {
+        margin: 2em 0;
+        border-top: 8px solid $YouTube;
+
+        .growth {
+          p {
+            color: $BrightRed;
+          }
+        }
+      }
+    }
+
+    .overview__info {
+        display: grid;
+        width: 92vw;
+        margin: 1em 0 0;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        align-items: center;
+        gap: 20px;
+    
+        .facebook_views {
+            display: grid;
+            gap: 20px;
+            padding: 2em;
+            background-color: var(--CardBG);
+            text-align: center;
+            border-radius: 10px;
+    
+            .pageViews {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row;
+                gap: unset;
+    
+                p {
+                    color: var(--Text);
+                    font-weight: 600;
+                    font-size: 20px;
+                }
+            }
+    
+            .pageViews__total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                p {
+                    color: var(--Text2);
+                    font-size: 4em;
+                }
+    
+                .growth {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+    
+                    img {
+                        width: 15px;
+                    }
+    
+                    span {
+                        color: $LimeGreen;
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    
+        .facebook_likes {
+            display: grid;
+            gap: 20px;
+            padding: 2em;
+            background-color: var(--CardBG);
+            text-align: center;
+            border-radius: 10px;
+            margin: 1em 0;
+    
+            .Likes {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row;
+                gap: unset;
+    
+                p {
+                    color: var(--Text);
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
+    
+            .Likes__total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                p {
+                    color: var(--Text2);
+                    font-size: 4em;
+                }
+    
+                .growth {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+    
+                    img {
+                        width: 15px;
+                    }
+    
+                    span {
+                        color: $BrightRed;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    
+        .instagram_likes {
+    
+    
+                .Likes__total {
+    
+                    .growth {
+    
+                        span {
+                            color: $LimeGreen;
+                        }
+                    }
+                }
+    
+        }
+    
+        .instagram_views {
+            padding: 2em;
+        }
+    
+        .twitter_retweets {
+            display: grid;
+            gap: 20px;
+            padding: 2em;
+            background-color: var(--CardBG);
+            text-align: center;
+            border-radius: 10px;
+            margin: 1em 0;
+    
+            p {
+                color: var(--Text);
+                font-size: 20px;
+                font-weight: 600;
+            }
+    
+            .retweets {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row;
+                gap: unset;
+            }
+    
+            .retweets__total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                p {
+                    color: var(--Text2);
+                    font-size: 4em;
+                    font-weight: 100;
+                }
+    
+                .growth {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+    
+                    img {
+                        width: 15px;
+                    }
+    
+                    span {
+                        font-size: 20px;
+                        color: $LimeGreen;
+                    }
+                }
+            }
+    
+        }
+    
+        .twitter_likes {
+    
+            .Likes__total {
+    
+                .growth {
+    
+                    span {
+                        color: $LimeGreen;
+                    }
+                }
+            }
+        }
+    
+        .youtube_likes {
+            padding: 2em;
+        }
+    
+        .youtube_views {
+    
+            .pageViews__total {
+    
+                .growth {
+    
+                    span {
+                        color: $BrightRed;
+                    }
+                }
+            }
+        }
+    
+    }
+  }
+}
