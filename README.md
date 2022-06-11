@@ -28,9 +28,9 @@ My users should be able to:
 
 ### Links
 
-- Solution URL: [https://github.com/Jack-WebDev/theme-switcher.git]
+- Solution URL: [https://github.com/Jack-WebDev/Theme_Switcher.git]
 
-- Live Site URL: [https://jack-webdev.github.io/theme-switcher/]
+- Live Site URL: [https://jack-webdev.github.io/Theme_Switcher/]
 
 ## My Process
 
